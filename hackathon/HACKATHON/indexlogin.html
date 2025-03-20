@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>LOGIN</title>
+	<link rel="stylesheet" type="text/css" href="stylelogin.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" name="txt" placeholder="User name" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Login</button>
+				</form>
+			</div>
+	</div>
+
+<script>
+  const userNameInput = document.querySelector('input[name="txt"]');
+
+  // add an event listener for input change
+  userNameInput.addEventListener('input', () => {
+    // get the user name value
+    const userName = userNameInput.value;
+
+    // check if the user name is at least 5 characters long
+    if (userName.length < 5) {
+      userNameInput.setCustomValidity('User name must be at least 5 characters long');
+    } else {
+      // check if the user name contains numbers or special characters
+      const regex = /^[a-zA-Z]+$/;
+      if (!regex.test(userName)) {
+        userNameInput.setCustomValidity('User name cannot contain numbers or special characters');
+      } else {
+        userNameInput.setCustomValidity('');
+      }
+    }
+  });
+
+  // prevent form submission if there are invalid fields
+  const signUpForm = document.querySelector('.signup form');
+  signUpForm.addEventListener('submit', (event) => {
+    if (!signUpForm.checkValidity()) {
+      event.preventDefault();
+    }
+  });
+
+  const passwordInput = document.querySelector('input[name="pswd"]');
+
+  // add an event listener for input change
+  passwordInput.addEventListener('input', () => {
+    // get the password value
+    const password = passwordInput.value;
+
+    // check if the password meets the requirements
+    const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
+    if (!regex.test(password)) {
+      passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one special character, and be at least 6 characters long');
+    } else {
+      passwordInput.setCustomValidity('');
+    }
+  });
+
+  // prevent form submission if there are invalid fields
+  signUpForm.addEventListener('submit', (event) => {
+    if (!signUpForm.checkValidity()) {
+      event.preventDefault();
+    }
+  });
+
+</script>
+</body>
+</html>
+
